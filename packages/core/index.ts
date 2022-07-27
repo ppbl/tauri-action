@@ -395,16 +395,19 @@ export async function buildProject(
 
           const cratePath = getWorkspaceDir(app.tauriPath) ?? app.tauriPath
 
-          const artifactsPath = join(
+          let artifactsPath = join(
             getTargetDir(cratePath),
             debug ? 'debug' : 'release'
           )
 
           if (platform() === 'darwin') {
+            if(args?.[1] === 'aarch64-apple-darwin') {
+              artifactsPath += '/aarch64-apple-darwin'
+            }
             return [
               join(
                 artifactsPath,
-                `bundle/dmg/${fileAppName}_${app.version}_${args[1] === 'aarch64-apple-darwin'? 'aarch64': process.arch}.dmg`
+                `bundle/dmg/${fileAppName}_${app.version}_${args?.[1] === 'aarch64-apple-darwin'? 'aarch64': process.arch}.dmg`
               ),
               join(artifactsPath, `bundle/macos/${fileAppName}.app`),
               join(artifactsPath, `bundle/macos/${fileAppName}.app.tar.gz`),
