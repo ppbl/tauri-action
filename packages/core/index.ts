@@ -404,7 +404,7 @@ export async function buildProject(
             return [
               join(
                 artifactsPath,
-                `bundle/dmg/${fileAppName}_${app.version}_${process.arch}.dmg`
+                `bundle/dmg/${fileAppName}_${app.version}_${args[1] === 'aarch64-apple-darwin'? 'aarch64': process.arch}.dmg`
               ),
               join(artifactsPath, `bundle/macos/${fileAppName}.app`),
               join(artifactsPath, `bundle/macos/${fileAppName}.app.tar.gz`),
