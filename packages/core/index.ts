@@ -395,15 +395,13 @@ export async function buildProject(
 
           const cratePath = getWorkspaceDir(app.tauriPath) ?? app.tauriPath
 
-          let artifactsPath = join(
+          const artifactsPath = join(
             getTargetDir(cratePath),
+            args?.[1] === 'aarch64-apple-darwin'?'aarch64-apple-darwin': '',
             debug ? 'debug' : 'release'
           )
 
           if (platform() === 'darwin') {
-            if(args?.[1] === 'aarch64-apple-darwin') {
-              artifactsPath += '/aarch64-apple-darwin'
-            }
             return [
               join(
                 artifactsPath,
