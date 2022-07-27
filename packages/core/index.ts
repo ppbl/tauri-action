@@ -397,7 +397,7 @@ export async function buildProject(
 
           const artifactsPath = join(
             getTargetDir(cratePath),
-            args?.[1] === 'aarch64-apple-darwin'?'aarch64-apple-darwin': '',
+            args?.[1] ? args[1] : '',
             debug ? 'debug' : 'release'
           )
 
